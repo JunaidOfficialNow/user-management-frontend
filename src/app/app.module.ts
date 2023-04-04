@@ -11,6 +11,8 @@ import { FellowUsersComponent } from './component/user-home/fellow-users/fellow-
 import { ProfileComponent } from './component/user-home/profile/profile.component';
 import { AdminLoginComponent } from './component/admin-login/admin-login.component';
 import { AdminHomeComponent } from './component/admin-home/admin-home.component';
+import { AdminHeaderComponent } from './component/admin-home/admin-header/admin-header.component';
+import { UsersComponent } from './component/admin-home/users/users.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AdminHomeComponent } from './component/admin-home/admin-home.component'
     FellowUsersComponent,
     ProfileComponent,
     AdminLoginComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    AdminHeaderComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
