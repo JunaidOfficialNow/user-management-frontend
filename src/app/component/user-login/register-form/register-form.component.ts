@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-register-form',
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterFormComponent {
   constructor(private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cookie: CookieService
     ) {}
 
   isLoading = false;
@@ -22,9 +24,12 @@ export class RegisterFormComponent {
     this.isLoading= true;
     this.authService.signUp(form.value).subscribe(token => {
       this.isLoading= false;
-      this.router.navigate(['/home']);
-
-      console.log(token)
+      if ( token.access_token) {
+        this.cookie.set('token', token.access_token);
+        this.router.navigate(['/home']);
+      } else {
+        this.error = 'An unknown error occurred';
+      }
     }, error => {
       this.isLoading = false;
       this.error = null;

@@ -17,6 +17,7 @@ import { UsersComponent } from './component/admin-home/users/users.component';
 import { FormsModule } from '@angular/forms';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { AlertComponent } from './shared/alert/alert.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { AlertComponent } from './shared/alert/alert.component';
     HttpClientModule,
     
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
