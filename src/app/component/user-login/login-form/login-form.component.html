@@ -1,12 +1,15 @@
 
 <div class="w-[40vw] h-[50vh] bg-slate-800 text-black">
-  <form action="" class="w-[40vw] h-[50vh] flex flex-col justify-center items-center text-white">
+  <form class="w-[40vw] h-[50vh] flex flex-col justify-center items-center text-white" #authform="ngForm"  >
     <h3>Login here</h3>
     <div class=" w-[90%] h-[50%] flex items-center flex-col">
-      <input type="text" class="w-[90%] h-[30%] my-5 bg-slate-950 rounded-lg ps-2" placeholder="you@example.com">
-      <input type="text" class="w-[90%] h-[30%] rounded-lg   bg-slate-950 ps-2" placeholder="password">
+      <input type="text" email required class="w-[90%] h-[30%] my-5 bg-slate-950 rounded-lg ps-2" ngModel name="email" placeholder="you@example.com">
+      <input type="password" ngModel name="password" class="w-[90%] h-[30%] rounded-lg   bg-slate-950 ps-2" placeholder="password">
     </div>
-  
-    <button class="border-red-100 border-solid border-2 w-40 rounded-xl p-2 hover:bg-white hover:text-black mb-10">Login</button>
+   <div class="buttons">
+    <button type='submit' class="border-red-100 border-solid border-2 w-40 rounded-xl p-2 hover:bg-white hover:text-black mb-10 me-3" [disabled]="!authform.valid">Login</button>
+    <a  routerLink="/register" class="border-red-100 border-solid border-2 w-40 rounded-xl p-2 hover:bg-white hover:text-black mb-10 text-center">Signup</a>
+   </div>
+
   </form>
 </div>
