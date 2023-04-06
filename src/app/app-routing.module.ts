@@ -6,7 +6,7 @@ import { AdminLoginComponent } from './component/admin-login/admin-login.compone
 import { AdminHomeComponent } from './component/admin-home/admin-home.component';
 import { RegisterFormComponent } from './component/user-login/register-form/register-form.component';
 import { LoginFormComponent } from './component/user-login/login-form/login-form.component';
-import { AUthGuard, LoginGuard } from './guards/login.guard';
+import { AUthGuard, AdminAuthGuard, AdminLoginGuard, LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {path: '', component: UserLoginComponent, canActivate: [LoginGuard] ,
@@ -17,8 +17,8 @@ const routes: Routes = [
    
 },
   {path: 'home', component: UserHomeComponent, canActivate: [AUthGuard]},
-  {path: 'admin', component: AdminLoginComponent},
-  {path: 'admin/home', component: AdminHomeComponent}
+  {path: 'admin', component: AdminLoginComponent, canActivate: [AdminLoginGuard]},
+  {path: 'admin/home', component: AdminHomeComponent, canActivate: [AdminAuthGuard]},
 ];
 
 @NgModule({

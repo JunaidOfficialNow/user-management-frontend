@@ -10,7 +10,8 @@ import { HttpService } from 'src/app/service/http.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private router: Router,
     private http: HttpService
     ) {}
@@ -47,7 +48,6 @@ export class ProfileComponent implements OnInit {
          }
         },
         error => {
-          console.log(error)
           if ( Array.isArray(error.error.message)) {
             alert(error.error.message[0]);
           }

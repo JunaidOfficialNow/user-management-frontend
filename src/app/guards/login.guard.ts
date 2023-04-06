@@ -24,6 +24,24 @@ export class LoginGuard implements CanActivate {
 @Injectable({
   providedIn: 'root',
 })
+export class AdminLoginGuard implements CanActivate {
+
+  constructor(private authService: AuthService,
+    private router: Router
+    
+    ) {}
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    if (this.authService.isAdminLoggedIn()) {
+      return this.router.navigate(['/admin/home']);
+    } else {
+      return true;
+    }
+  }
+}
+
+@Injectable({
+  providedIn: 'root',
+})
 export class AUthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
@@ -37,5 +55,24 @@ export class AUthGuard implements CanActivate {
       return true;
      }
      return this.router.navigate(['']);
+}
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AdminAuthGuard implements CanActivate {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+
+  ) {
+
+  }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    if (this.authService.isAdminLoggedIn()) {
+      return true;
+     }
+     return this.router.navigate(['/admin']);
 }
 }

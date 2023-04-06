@@ -23,6 +23,10 @@ export class AuthService {
      return this.cookie.check('token');
   }
 
+  isAdminLoggedIn(): boolean {
+    return this.cookie.check('admin_token');
+ }
+
   logout(): void {
     this.cookie.delete('token');
   }
@@ -30,5 +34,8 @@ export class AuthService {
   Login(loginUserDto: CreateUserDto) {
     return this.http.post<{access_token: string}>(`${this.baseUrl}/auth/login`, loginUserDto);
   }
- 
+
+  adminLogin(loginUserDto: CreateUserDto) {
+    return this.http.post<{ access_token: string }>(`${this.baseUrl}/auth/admin/login`, loginUserDto);
+  }
 }
