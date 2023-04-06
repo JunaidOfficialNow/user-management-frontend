@@ -26,5 +26,9 @@ export class AuthService {
   logout(): void {
     this.cookie.delete('token');
   }
+
+  Login(loginUserDto: CreateUserDto) {
+    return this.http.post<{access_token: string}>(`${this.baseUrl}/auth/login`, loginUserDto);
+  }
  
 }

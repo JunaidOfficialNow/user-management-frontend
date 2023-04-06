@@ -33,7 +33,12 @@ export class RegisterFormComponent {
     }, error => {
       this.isLoading = false;
       this.error = null;
-       this.error = error.error.message[0];
+      if ( Array.isArray(error.error.message)) {
+        this.error = error.error.message[0];
+      }
+      else {
+        this.error = error.error.message;
+      }
     })
     
   }

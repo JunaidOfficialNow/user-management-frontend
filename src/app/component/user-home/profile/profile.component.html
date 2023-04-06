@@ -2,14 +2,15 @@
   <h3 class="mt-10 underline text-3xl text-white font-mono">And this is you</h3>
 
    <div class="profile h-[80%] w-[90%] mt-12 flex flex-col items-center">
-    <img src="https://th.bing.com/th?id=OIP.zCAXDuwn_eW3SyVWfZueyQHaJ4&w=216&h=288&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"
-     alt="profile image" class="w-[40%] h-[50%] bg-slate-50 rounded-full bg-contain">
+    <img [src]="src"
+     alt="profile image" class="w-[40%] h-[50%] bg-slate-50 rounded-full bg-contain" (click)="onFileEnable(fileInput)">
 
 
      <div class="details text-white text-center mt-4 font-mono">
-      <h2 class="text-2xl">Junaid</h2>
-      <h4>jamshedjunaidmp@gmail.com</h4>
+      <h2 class="text-2xl">{{userProps.name}}</h2>
+      <h4>{{userProps.email}}</h4>
      </div>
+     <input type="file" #fileInput (change)="onFileInput($event)" style="display: none;">
 
      <button (click)="logout()" class="bg-blue-500 text-white w-40 h-10 mt-5 hover:bg-transparent hover:border-solid hover:border-blue-500 hover:border-2 rounded">
       Logout
