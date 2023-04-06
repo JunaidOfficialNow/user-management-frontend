@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -13,8 +13,15 @@ export class AdminHeaderComponent {
     private cookie: CookieService
   ) {}
 
+  @Output('onQuery') queryEmitter: EventEmitter<string> = new EventEmitter();
+
   logout(): void {
     this.cookie.delete('admin_token');
     this.router.navigate(['/'])
+  }
+
+  searchUser(event: Event) {
+    this.queryEmitter.emit((event.target as HTMLInputElement).value)
+    
   }
 }

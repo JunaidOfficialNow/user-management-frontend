@@ -20,6 +20,7 @@ export class AdminLoginComponent {
   onSubmit(form: NgForm) {
     this.authSerivce.adminLogin({email: form.value.email, password: form.value.password}).subscribe(token=> {
       if (token.access_token) {
+        console.log(token.access_token)
         this.cookie.set('admin_token', token.access_token);
         this.router.navigate(['/admin/home']);
       }

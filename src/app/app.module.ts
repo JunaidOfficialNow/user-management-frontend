@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { CookieService } from 'ngx-cookie-service';
-import { TokenInterceptor } from './interceptor/token.interceptor';
+import { AdminInterceptor, TokenInterceptor } from './interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,11 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AdminInterceptor,
       multi: true,
     }
   ],
