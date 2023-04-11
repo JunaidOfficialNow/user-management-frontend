@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateUserDto } from './interface/create-user-dto';
 import { CookieService } from 'ngx-cookie-service';
+import jwtDecode from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,15 @@ export class AuthService {
   }
 
   isAdminLoggedIn(): boolean {
-    return this.cookie.check('admin_token');
+    const token = this.cookie.get('token');
+    if (token) {
+      const tokenDecoded: any = jwtDecode(token);
+      console.log(tokenDecoded)
+      if (tokenDecoded.admin) {
+           return true;
+      }
+    }
+    return false;
  }
 
   logout(): void {

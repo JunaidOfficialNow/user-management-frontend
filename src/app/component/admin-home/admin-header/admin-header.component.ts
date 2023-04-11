@@ -16,7 +16,7 @@ export class AdminHeaderComponent {
   @Output('onQuery') queryEmitter: EventEmitter<string> = new EventEmitter();
 
   logout(): void {
-    this.cookie.delete('admin_token');
+    this.cookie.delete('token');
     this.router.navigate(['/'])
   }
 

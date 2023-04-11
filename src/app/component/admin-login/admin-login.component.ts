@@ -4,7 +4,6 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/auth.service';
-
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
@@ -20,8 +19,7 @@ export class AdminLoginComponent {
   onSubmit(form: NgForm) {
     this.authSerivce.adminLogin({email: form.value.email, password: form.value.password}).subscribe(token=> {
       if (token.access_token) {
-        console.log(token.access_token)
-        this.cookie.set('admin_token', token.access_token);
+        this.cookie.set('token', token.access_token);
         this.router.navigate(['/admin/home']);
       }
     }, error=> {
