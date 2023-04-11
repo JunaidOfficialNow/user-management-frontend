@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { HttpService } from 'src/app/service/http.service';
 
 export interface User {
@@ -14,32 +16,28 @@ export interface User {
   templateUrl: './user-home.component.html',
   styleUrls: ['./user-home.component.css']
 })
-export class UserHomeComponent implements OnInit{
+export class UserHomeComponent implements OnInit, OnDestroy{
 
   constructor(
-    private http: HttpService
-  ) {}
+    private http: HttpService,
+    private store: Store<{users: {users: User[]}}>
 
-  fellowUsers: {name: string; email: string}[] = [];
+  ) {}
+  users: User[] = [];
   user: User = {} as User;
+  subscription: Subscription = {} as Subscription;
 
   ngOnInit(): void {
-    this.http.getFellowUsers().subscribe(users => {
-      users.forEach((user)=> {
-        this.fellowUsers.push(user);
+      this.subscription = this.store.select('users').subscribe(users=> {
+        this.users = users.users;
       })
-    }, error => {
-      if ( Array.isArray(error.error.message)) {
-        alert(error.error.message[0])
-      }
-      else {
-        alert(error.error.message);
-      }
-    })
-
     this.http.getCurrentUser().subscribe((user)=> {
         this.user = {name: user.name, email: user.email, photoUrl: user.photoUrl}
     })
+    }
+
+    ngOnDestroy(): void {
+      this.subscription.unsubscribe();
     }
 
 }

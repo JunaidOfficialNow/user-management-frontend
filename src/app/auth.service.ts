@@ -29,7 +29,6 @@ export class AuthService {
     const token = this.cookie.get('token');
     if (token) {
       const tokenDecoded: any = jwtDecode(token);
-      console.log(tokenDecoded)
       if (tokenDecoded.admin) {
            return true;
       }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/service/http.service';
 import { User } from '../user-home/user-home.component';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-admin-home',
@@ -10,6 +11,7 @@ import { User } from '../user-home/user-home.component';
 export class AdminHomeComponent implements OnInit {
   constructor(
     private http: HttpService,
+    private store: Store<{users: {users: User[]}}>
   ) {}
 
   searchQuery: string = '';
@@ -17,20 +19,10 @@ export class AdminHomeComponent implements OnInit {
   users: User[] = [] as User[]
 
   ngOnInit(): void {
-    this.http.getAdminUsers().subscribe(users => {
-      users.forEach(user=> {
-        this.users.push(user);
-      })
-    }, error=> {
-      if ( Array.isArray(error.error.message)) {
-        alert(error.error.message[0]);
-      }
-      else {
-        alert(error.error.message);
-      }
+     this.store.select('users').subscribe(users=> {
+      this.users = users.users;
+     })
 
-    })
-    
   }
 
   searchUser(value: string) {

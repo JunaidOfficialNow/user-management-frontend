@@ -19,6 +19,8 @@ import { LoadingComponent } from './shared/loading/loading.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { usersReducer } from './store/user.reducer';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    StoreModule.forRoot({users: usersReducer})
     
   ],
   providers: [CookieService,

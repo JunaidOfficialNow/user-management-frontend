@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { User } from '../user-home.component';
 
 @Component({
   selector: 'app-fellow-users',
@@ -7,6 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class FellowUsersComponent {
 
-  @Input('users') userProps: {name: string , email: string}[] = [];
+  @Input('users') userProps: User[] | undefined = {} as User[];
 
 }
